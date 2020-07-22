@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -20,7 +21,6 @@ namespace BluescreenSimulator.Views
         private readonly Windows10BluescreenViewModel _vm;
         private readonly CancellationTokenSource _source = new CancellationTokenSource();
         private bool _realClose;
-        private TranslationService translation = new TranslationService();
         public BluescreenWindow(Windows10BluescreenViewModel data)
         {
             DataContext = _vm = data;
@@ -64,12 +64,6 @@ namespace BluescreenSimulator.Views
         {
             try
             {
-                _vm.MainText1 =  await translation.Translate(_vm.MainText1,"fr");
-                _vm.MainText2 =  await translation.Translate(_vm.MainText2, "fr");
-                _vm.MoreInfo =  await translation.Translate(_vm.MoreInfo, "fr");
-                _vm.Complete =  await translation.Translate(_vm.Complete, "fr");
-                _vm.SupportPerson =  await translation.Translate(_vm.SupportPerson, "fr");
-                _vm.StopCode =  await translation.Translate(_vm.StopCode, "fr");
                 await _vm.StartProgress(_source.Token);
                 Close(); // we're done
             }
